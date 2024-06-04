@@ -1,12 +1,19 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 function App() {
 
   const queryClient = useQueryClient();
+
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["posts"],
+    queryFn: () => {
+      return fetch(`https://jsonplaceholder.typicode.com/posts`)
+        .then((res) => res.json());
+    },
+    // staleTime: 4000, 
+    refetchInterval:4000
+  });
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["posts"],
