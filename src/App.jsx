@@ -11,6 +11,7 @@ function App() {
         .then((res) => res.json());
     },
     refetchInterval: 4000, // Optional: Refetch posts every 4 seconds
+    refetchOnWindowFocus: true, // Refetch on window focus
   });
 
   const { mutate, isPending, isSuccess, isError } = useMutation({
