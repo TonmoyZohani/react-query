@@ -12,6 +12,7 @@ function App() {
     },
     refetchInterval: 4000, // Optional: Refetch posts every 4 seconds
     refetchOnWindowFocus: true, // Refetch on window focus
+    retry: 2, // Retry failed queries up to 2 times
   });
 
   const { mutate, isPending, isSuccess, isError } = useMutation({
