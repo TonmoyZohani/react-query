@@ -28,7 +28,7 @@ function App() {
     },
   });
 
-  const [selectedPostId, setSelectedPostId] = useState(null);
+  const [selectedPostId, setSelectedPostId] = useState(null); // Check
 
   const {
     data: selectedPost,
