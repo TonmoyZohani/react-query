@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import React from 'react'
 
 const Test = () => {
@@ -12,6 +12,11 @@ const Test = () => {
     },
     refetchInterval:4000,
     retry:2
+  })
+
+  const {mutate,isPending,isSuccess,isError}= useMutation({
+    mutationFn:(newPost)=>
+      fetch
   })
 
   return (
