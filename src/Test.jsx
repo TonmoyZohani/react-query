@@ -8,8 +8,10 @@ const Test = () => {
   const {data,error,isLoading} = useQuery({
     queryKey:["posts"],
     queryFn:()=>{
-      return fetch(`https://jsonplaceholder.typicode.com/posts`).then((res)=>res.json)
-    }
+      return fetch(`https://jsonplaceholder.typicode.com/posts`).then((res)=>res.json())
+    },
+    refetchInterval:4000,
+    retry:2
   })
 
   return (
