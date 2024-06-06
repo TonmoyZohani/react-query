@@ -20,7 +20,10 @@ const Test = () => {
         method: "POST",
         body: JSON.stringify(newPost),
         headers: { "Content-type": "application/json" }
-      }).then((res) => res.json())
+      }).then((res) => res.json()),
+    onSuccess: (newPost) => {
+      queryClient.setQueryData(["posts"], (oldPosts) => [...oldPosts, newPost])
+    }
   })
 
   return (
