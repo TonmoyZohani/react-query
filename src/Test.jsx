@@ -5,18 +5,22 @@ const Test = () => {
 
   const queryClient = useQueryClient();
 
-  const {data,error,isLoading} = useQuery({
-    queryKey:["posts"],
-    queryFn:()=>{
-      return fetch(`https://jsonplaceholder.typicode.com/posts`).then((res)=>res.json())
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["posts"],
+    queryFn: () => {
+      return fetch(`https://jsonplaceholder.typicode.com/posts`).then((res) => res.json())
     },
-    refetchInterval:4000,
-    retry:2
+    refetchInterval: 4000,
+    retry: 2
   })
 
-  const {mutate,isPending,isSuccess,isError}= useMutation({
-    mutationFn:(newPost)=>
-      fetch
+  const { mutate, isPending, isSuccess, isError } = useMutation({
+    mutationFn: (newPost) =>
+      fetch(`https://jsonplaceholder.typicode.com/posts`, {
+        method: "POST",
+        body: JSON.stringify(newPost),
+        headers: { "Content-type": "application/json" }
+      }).then((res) => res.json())
   })
 
   return (
