@@ -26,6 +26,22 @@ const Test = () => {
     }
   })
 
+  const mutation = useMutation(updateTodo, {
+    onMutate: async newTodo => {
+      await queryClient.cancelQueries('todos');
+      const previousTodos = queryClient.getQueryData('todos');
+      queryClient.setQueryData('todos', old => [...old, newTodo]);
+      return { previousTodos };
+    },
+    onError: (err, newTodo, context) => {
+      queryClient.setQueryData('todos', context.previousTodos);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries('todos');
+    },
+  });
+  
+
 
   return (
     <div>Test</div>
