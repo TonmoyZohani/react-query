@@ -95,3 +95,6 @@ function App() {
 }
 
 export default App;
+
+
+const { mutate, isPending, isSuccess, isError } = useMutation({...});
