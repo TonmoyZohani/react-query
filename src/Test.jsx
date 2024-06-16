@@ -54,45 +54,43 @@ const handleChange = (e) => {
   setData({ ...data, [name]: value });
 };
 
+// Async- Await
 
 const handleSubmit=async(e)=>{
   e.preventDefault();
 
   try{
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts`,{
-      headers:{
-        "Content-type":"application/json",
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
       },
-      body:JSON.stringify(formData)
+      body: JSON.stringify(formData)
     });
 
-    const data = response.json();
+    const data = await response.json();
+    console.log(data);
 
   }catch(error){
     console.log(error);
   }
 }
 
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-
-
-
-
-// const handleSubmit = async(e)=>{
-//   e.preventDerfault();
-
-//  try{
-//     const response = await fetch(`https://jsonplaceholder.typicode.com/posts`,{
-//       headers:{
-//         "Content-type":"apllication/json",
-//       },
-//       body:JSON.stringify(data)
-//     });
-
-//     const responseData = await response.json();
-
-//  }catch(error){
-//   console.log(error)
-//  }
-
-// }
+  fetch(`https://jsonplaceholder.typicode.com/posts`, {
+    method:"POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
