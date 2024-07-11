@@ -4,16 +4,28 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 function App() {
   const queryClient = useQueryClient();
 
-  const { data: posts, error, isLoading } = useQuery({
-    queryKey: ["posts"],
-    queryFn: () => {
-      return fetch(`https://jsonplaceholder.typicode.com/posts`)
-        .then((res) => res.json());
+  // const { data: posts, error, isLoading } = useQuery({
+  //   queryKey: ["posts"],
+  //   queryFn: () => {
+  //     return fetch(`https://jsonplaceholder.typicode.com/posts`)
+  //       .then((res) => res.json());
+  //   },
+  //   refetchInterval: 4000, // Optional: Refetch posts every 4 seconds
+  //   refetchOnWindowFocus: true, // Refetch on window focus
+  //   retry: 2, // Retry failed queries up to 2 times
+  // });
+
+  const {data:posts,error,isLoading} = useQuery({
+    queryKey:["posts"],
+    queryFn:()=>{
+      return fetch(`https://jsonplaceholder.typicode.com/posts`).then((res)=>res.json())
     },
-    refetchInterval: 4000, // Optional: Refetch posts every 4 seconds
-    refetchOnWindowFocus: true, // Refetch on window focus
-    retry: 2, // Retry failed queries up to 2 times
-  });
+    refetchInterval:4000,
+    refetchOnWindowFocus:true,
+    retry:2
+  })
+
+  
 
   // const { mutate, isPending, isSuccess, isError } = useMutation({
   //   mutationFn: (newPost) =>
