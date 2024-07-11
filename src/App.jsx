@@ -29,8 +29,14 @@ function App() {
   // });
 
 const {mutate,isPending,isSuccess,isError} = useMutation({
-  mutationFn:fetch(`https://jsonplaceholder.typicode.com/posts`),
-})
+  mutationFn:(newPost)=>fetch(`https://jsonplaceholder.typicode.com/posts`,{
+    method:"POST",
+    body:JSON.stringify(newPost),
+    headers:{"Content-type":"application/json"},}),then((res)=>res.json()),
+    onSuccess:(newPost)=>{
+      queryClient.setQueryData(["posts"],(oldPosts)=>[...oldPosts,newPost])
+    }
+  })
 
 
   const [selectedPostId, setSelectedPostId] = useState(null); // Check
